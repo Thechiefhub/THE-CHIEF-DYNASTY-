@@ -1,0 +1,6 @@
+{
+  "name": "The Chief Dynasty",
+  "description": "The digital headquarters of The Chief Dynasty Limited, a Nigerian multi-sector professional services, innovation, media, education, consulting, project management and digital enterprise.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
