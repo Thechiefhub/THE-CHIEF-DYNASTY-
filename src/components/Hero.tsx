@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowDown, GraduationCap, Megaphone, TrendingUp, Calendar, Cpu, Globe } from 'lucide-react';
 
 interface HeroProps {
@@ -7,6 +7,16 @@ interface HeroProps {
 }
 
 export default function Hero({ onExploreClick, onWorkClick }: HeroProps) {
+  const [wordIndex, setWordIndex] = useState(0);
+  const words = ["FUTURE.", "CONTINENT.", "DYNASTY.", "INDUSTRIES."];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % words.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
+
   const sectors = [
     { label: 'Education', icon: GraduationCap, delay: '0.1s' },
     { label: 'Media', icon: Megaphone, delay: '0.2s' },
@@ -29,7 +39,7 @@ export default function Hero({ onExploreClick, onWorkClick }: HeroProps) {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-35"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col justify-between flex-grow">
-        <div className="my-auto max-w-4xl">
+        <div className="my-auto max-w-4xl mx-auto text-center flex flex-col items-center justify-center">
           {/* Tagline Indicator with Sleek Interface style */}
           <div className="inline-flex items-center gap-2.5 border border-purple-500/20 bg-purple-950/20 text-[#a78bfa] px-4 py-2 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase mb-8 shadow-[0_4px_20px_rgba(109,40,217,0.15)] animate-classy-fade-up select-none shimmer-pill hover:border-purple-500/40 hover:shadow-[0_4px_30px_rgba(139,92,246,0.25)] transition-all duration-300">
             <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse"></span>
@@ -37,21 +47,24 @@ export default function Hero({ onExploreClick, onWorkClick }: HeroProps) {
           </div>
 
           {/* Majestic Bold Headline */}
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold leading-[0.9] tracking-tighter mb-8 font-display">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold leading-[1.0] tracking-tighter mb-8 font-display">
             BUILDING IDEAS.<br />
             CREATING IMPACT.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6D28D9] via-[#8B5CF6] to-white">
-              SHAPING THE FUTURE.
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#6D28D9] via-[#8B5CF6] to-white">
+              SHAPING THE&nbsp;
+            </span>
+            <span key={wordIndex} className="inline-block animate-classy-fade-up text-transparent bg-clip-text bg-gradient-to-r from-[#a78bfa] via-purple-300 to-white">
+              {words[wordIndex]}
             </span>
           </h1>
 
           {/* Balanced Supporting Statement */}
-          <p className="text-lg text-white/60 max-w-lg mb-10 leading-relaxed font-light">
+          <p className="text-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed font-light text-center">
             The Chief Dynasty is a premium African corporate group building platforms, brands, and opportunities across education, media, consulting, and digital innovation.
           </p>
 
           {/* Action Callouts in Sleek Rounded-Full Theme */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 mb-16 justify-center items-center">
             <button
               onClick={onExploreClick}
               className="px-8 py-4 bg-white hover:bg-neutral-200 text-black text-xs font-bold tracking-widest uppercase rounded-full shadow-[0_4px_30px_rgba(255,255,255,0.15)] transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] cursor-pointer text-center"
